@@ -1,7 +1,11 @@
 import logging
 import os
 import base64
+import aiofiles
+import aiohttp
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+import config
 
 logging.basicConfig(level=logging.INFO)
 
@@ -24,33 +28,73 @@ async def gen_thumb(videoid: str):
         os.makedirs("cache", exist_ok=True)
 
         
-                
-            
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        root_dir = os.path.dirname(current_dir)
-        image_path = os.path.join(root_dir, "assets", "coremusic.jpg")
+        custom_image_url = getattr(
+            config, "CUSTOM_THUMB_URL", "https://files.catbox.moe/wser72.jpg"
+        )
+        image_path = f"cache/thumb{videoid}.png"
 
+        
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+        timeout = aiohttp.ClientTimeout(total=15)
+
+        async with aiohttp.ClientSession(headers=headers, timeout=timeout) as session:
+            async with session.get(custom_image_url) as resp:
+                if resp.status == 200:
+                    async with aiofiles.open(image_path, mode="wb") as f:
+                        await f.write(await resp.read())
+                else:
+                    logging.error(
+                        f"Config Image URL မှ ပုံကို ဒေါင်းလုဒ်ဆွဲ၍ မရပါ။ Status: {resp.status}"
+                    )
+                    return None
 
         if not os.path.exists(image_path):
-            logging.error(f"ဖိုင်ကို ရှာမတွေ့ပါ။ လမ်းကြောင်းမှန်ကန်မှု ရှိမရှိ စစ်ဆေးပါ။: {image_path}")
             return None
 
         custom_img = Image.open(image_path).convert("RGB")
 
-    
+        
         bg_img = changeImageSize(1280, 720, custom_img)
-        background = bg_img.filter(ImageFilter.GaussianBlur(15))
-        darken = Image.new("RGBA", (1280, 720), (10, 10, 15, 100))
+        background = bg_img.filter(ImageFilter.GaussianBlur(1))
+        darken = Image.new("RGBA", (1280, 720), (10, 10, 15, 30))
         background = Image.alpha_composite(
             background.convert("RGBA"), darken
         ).convert("RGB")
 
         
-        target_w, target_h = 1280, 720
-        foreground = changeImageSize(target_w, target_h, custom_img)
-        background.paste(foreground, (0, 0))
+        target_w, target_h = 800, 450
+        orig_w, orig_h = custom_img.size
 
-        # Credit စာသားအပိုင်း
+        if orig_w / orig_h > target_w / target_h:
+            w_crop = int(orig_h * (target_w / target_h))
+            img_cropped = custom_img.crop(
+                ((orig_w - w_crop) // 2, 0, (orig_w + w_crop) // 2, orig_h)
+            )
+        else:
+            h_crop = int(orig_w * (target_h / target_w))
+            img_cropped = custom_img.crop(
+                (0, (orig_h - h_crop) // 2, orig_w, (orig_h + h_crop) // 2)
+            )
+
+        foreground = img_cropped.resize(
+            (target_w, target_h), Image.Resampling.LANCZOS
+        )
+
+        border_size = 10
+        bordered_img = Image.new(
+            "RGB",
+            (target_w + border_size * 2, target_h + border_size * 2),
+            (255, 255, 255),
+        )
+        bordered_img.paste(foreground, (border_size, border_size))
+
+        pos_x = (1280 - bordered_img.size[0]) // 2
+        pos_y = (720 - bordered_img.size[1]) // 2 - 20
+        background.paste(bordered_img, (pos_x, pos_y))
+
+        
         font_credit = None
         font_paths = [
             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
@@ -69,6 +113,7 @@ async def gen_thumb(videoid: str):
         if font_credit is None:
             font_credit = ImageFont.load_default()
 
+        
         secret_code = "U09VUkNFIC0gQEhBTlRIQVI5OTkgQEhFWF9LSU5HOQ=="
         credit_text = base64.b64decode(secret_code).decode("utf-8")
 
@@ -115,6 +160,10 @@ async def gen_thumb(videoid: str):
             colored_text, (pos_text_x - 5, pos_text_y - 5), colored_text
         )
         background = background.convert("RGB")
+
+        #
+        if os.path.exists(image_path):
+            os.remove(image_path)
 
         background_path = f"cache/{videoid}_v4.png"
         background.save(background_path, quality=95)
