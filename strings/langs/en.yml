@@ -172,7 +172,7 @@ queue_5 : "ᴛʜᴇʀᴇ's ᴏɴʟʏ ᴏɴᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋ �
 queue_6 : "<b>🕚 ᴅᴜʀᴀᴛɪᴏɴ :</b> ᴜɴᴋɴᴏᴡɴ ᴅᴜʀᴀᴛɪᴏɴ sᴛʀᴇᴀᴍ\n\nᴄʟɪᴄᴋ ᴏɴ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
 queue_7 : "\nᴄʟɪᴄᴋ ᴏɴ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
 queue_8 : "<b>{0} ᴘʟᴀʏᴇʀ</b>\n\n🎄 <b>sᴛʀᴇᴀᴍɪɴɢ :</b> {1}\n\n🔗 <b>sᴛʀᴇᴀᴍ ᴛʏᴘᴇ :</b> {2}\n🥀 <b>ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :</b> {3}\n{4}"
-stream_1 : "<blockquote><b>❖ 𝐒ʈʀ𝛆ɑɱɩŋʛ 𝐍๏Ꮗ ✮</b></blockquote>\n<blockquote><b>✮ 𝐓ɩttɭ𝛆 »</b> <a href={0}>{1}</a>\n<b>✮ 𝐃ʋɽɑʈɩσŋ »</b> {2} ᴍɪɴᴜᴛᴇs\n<b>✮ 𝐁ɣ »</b> {3}</blockquote>"
+stream_1 : "<blockquote><b><tg-emoji emoji-id='6289327805050134049'>🎧</tg-emoji>𝐒ʈʀ𝛆ɑɱɩŋʛ 𝐍๏Ꮗ <tg-emoji emoji-id='6289327805050134049'>🎧</tg-emoji> </b></blockquote>\n<blockquote><b><tg-emoji emoji-id='6289425206318474427'>🎧</tg-emoji> 𝐓ɩttɭ𝛆 »</b> <a href={0}>{1}</a>\n<b><tg-emoji emoji-id='6289645813018664244'>🎧</tg-emoji> 𝐃ʋɽɑʈɩσŋ »</b> {2} ᴍɪɴᴜᴛᴇs\n<b><tg-emoji emoji-id='6289463242548847390'>🎧</tg-emoji> 𝐁ɣ »</b> {3}</blockquote>\n<blockquote><b><tg-emoji emoji-id='6289573459999597168'>🎧</tg-emoji> 𝐂𝐫𝐞𝐚𝐭𝐨𝐫 » <a href='https://t.me/vipdeee'>𝐌𝐲𝐚 𝐓𝐡𝐚𝐞 𝐏𝐡𝐲𝐮</a></b></blockquote>"
 stream_2 : "➜ <b>𝖲𝗍𝖺𝗋𝗍𝖾𝖽 𝖲𝗍𝗋𝖾𝖺𝗆𝗂𝗇𝗀 |</b>\n\n<b>‣ 𝖲𝗍𝗋𝖾𝖺𝗆 𝖳𝗒𝗉𝖾 :</b> 𝖫𝗂𝗏𝖾 𝖲𝗍𝗋𝖾𝖺𝗆 [ 𝖴𝗋𝗅 ]\n<b>‣ 𝖱𝖾𝗊𝗎𝖾𝗌𝗍𝖾𝖽 𝖡𝗒 :</b> {0}"
 
 
@@ -308,6 +308,3 @@ gban_9 : "❖ ʟɪғᴛєᴅ ɢʟσʙᴧʟ ʙᴧη ғʀσϻ {0}.\n\n❖ υηʙ�
 gban_10 : "❖ ησ σηє ɪs ɢʟσʙᴧʟʟʏ ʙᴧηηєᴅ ғʀσϻ ᴛʜє ʙσᴛ."
 gban_11 : "❖ ғєᴛᴄʜɪηɢ ɢʙᴧηηєᴅ υsєʀs ʟɪsᴛ..."
 gban_12 : "❖  <b>ɢʟσʙᴧʟʟʏ ʙᴧηηєᴅ υsєʀs :</b>\n\n"
-
-
-
