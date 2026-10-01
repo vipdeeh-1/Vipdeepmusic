@@ -9,10 +9,10 @@ from py_yt import VideosSearch, Playlist
 import aiohttp
 import config
 
-API_URL = config.API_URL or os.environ.get("API_URL", None)
+API_URL = config.API_URL or os.environ.get("API_URL", "https://apisparrow.site")
 if API_URL:
     API_URL = API_URL.rstrip("/")
-API_KEY = config.API_KEY or os.environ.get("API_KEY", None)
+API_KEY = config.API_KEY or os.environ.get("API_KEY", "sparrowQkRHLixfwxZH9UiabXaF1qYf")
 
 DOWNLOAD_DIR = "downloads"
 
